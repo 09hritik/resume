@@ -1,0 +1,385 @@
+% AUTHOR: Sina Atalay
+% LICENSE: https://github.com/sinaatalay/rendercv/blob/main/LICENSE
+
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+        ignoreheadfoot, % set margins without considering header and footer
+        top=2 cm, % seperation between body and page edge from the top
+        bottom=2 cm, % seperation between body and page edge from the bottom
+        left=2 cm, % seperation between body and page edge from the left``''
+        right=2 cm, % seperation between body and page edge from the right
+        footskip=1.0 cm, % seperation between body and footer
+        % showframe % for debugging 
+    ]{geometry} % for adjusting page geometry
+\usepackage[explicit]{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Hritik Mohanty's CV},
+    pdfauthor={Hritik Mohanty},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage[default, type1]{sourcesanspro} % for using source sans 3 font
+\usepackage{ifthen}
+
+% Some settings:
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{
+        % make the font size of the section title large and color it with the primary color
+        \Large\color{primaryColor}
+    }{
+    }{
+    }{
+        % print bold title, give 0.15 cm space and draw a line of 0.8 pt thickness
+        % from the end of the title to the end of the body
+        \textbf{#1}\hspace{0.15cm}\titlerule[0.8pt]\hspace{-0.1cm}
+    }[] % section title formatting
+
+\titlespacing{\section}{
+        % left space:
+        0pt
+    }{
+        % top space:
+        0.3 cm
+    }{
+        % bottom space:
+        0.2 cm
+    } % section title spacing
+
+\newcolumntype{L}[1]{
+    >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
+} % left-aligned fixed width column type
+\newcolumntype{R}[1]{
+    >{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
+} % right-aligned fixed width column type
+\newcolumntype{K}[1]{
+    >{\let\newline\\\arraybackslash\hspace{0pt}}X
+} % justified flexible width column type
+\setlength\tabcolsep{-1.5pt} % no space between columns
+\newenvironment{highlights}{
+        \begin{itemize}[
+                topsep=0pt,
+                parsep=0.10 cm,
+                partopsep=0pt,
+                itemsep=0pt,
+                after=\vspace{-1\baselineskip},
+                leftmargin=0.4 cm + 3pt
+            ]
+    }{
+        \end{itemize}
+    } % new environment for highlights
+
+\newenvironment{header}{
+        \setlength{\topsep}{0pt}\par\kern\topsep\centering\color{primaryColor}\linespread{1.5}
+    }{
+        \par\kern\topsep
+    } % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+ % new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\mbox{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}}
+
+\let\originalTabularx\tabularx
+\let\originalEndTabularx\endtabularx
+
+\renewenvironment{tabularx}{\bgroup\centering\originalTabularx}{\originalEndTabularx\par\egroup}
+
+% For TextEntrys (see https://tex.stackexchange.com/a/600/287984):
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1\topsep=0pt\itemsep=0pt\parsep=0pt\parskip=0pt\labelwidth=0pt\itemindent=0pt\labelsep=0pt}\item[]}
+\let\endchangemargin=\endlist 
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+\begin{document}
+    \placelastupdatedtext
+    \begin{header}
+        \fontsize{30 pt}{30 pt}
+        \textbf{Hritik Mohanty}
+
+        \vspace{0.3 cm}
+
+        \normalsize
+        \mbox{\hrefWithoutArrow{tel:+7086019932}{{\footnotesize\faPhone*}\hspace*{0.13cm}+91 7086019932}}
+        \hspace*{0.5 cm}
+        \mbox{\hrefWithoutArrow{mailto:09hritik@gmail.com.com}{{\small\faEnvelope[regular]}\hspace*{0.13cm}09hritik@gmail.com}}
+        \hspace*{0.5 cm}
+        \mbox{{\small\faMapMarker*}\hspace*{0.13cm}Bhubaneshwar}
+        \hspace*{0.5 cm}
+        %\mbox{\hrefWithoutArrow{https://yourwebsite.com/}{{\small\faLink}\hspace*{0.13cm}yourwebsite.com}}
+        \hspace*{0.5 cm}
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/hritik-mohanty}{{\small\faLinkedinIn}\hspace*{0.13cm}Hritik Mohanty}}
+        \hspace*{0.5 cm}
+        \mbox{\hrefWithoutArrow{https://github.com/09hritik}{{\small\faGithub}\hspace*{0.13cm}09hritik}}
+        \hspace*{0.5 cm}
+    \end{header}
+
+    \vspace{0.3 cm}
+
+
+    \section{Summary}
+
+        \begin{changemargin}{0.2 cm}{0.2 cm}
+Enthusiastic Computer Science Engineering student at Kalinga Institute of Industrial Technology with a strong foundation in machine learning, artificial intelligence, natural language processing, and Python programming. Proven aptitude for leveraging advanced technologies to solve complex problems and drive innovation. Passionate about exploring emerging trends in AI and ML while continuously expanding knowledge and skills to contribute effectively to the field
+        \end{changemargin}
+
+
+
+
+
+    
+    \section{Education}
+
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            L{0.85cm}
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{}
+            &
+            \textbf{Kalinga Institute of Industrial Technology}
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item \textbf{B.Tech}, Computer Science And Engineering
+                \item GPA: 7.12/10 
+             
+            \end{highlights}
+            &
+            
+
+            2021 to 2025
+        \end{tabularx}
+
+
+    
+   % \section{Experience}
+
+%\begin{tabularx}{
+            %\textwidth-0.4 cm-0.13cm
+        %}{
+           % K{0.2 cm}
+            %R{4.1 cm}
+        %}
+           % \textbf{STUVALLEY }, Software Design Engineer, Intern
+
+            %\vspace{0.10 cm}
+
+            %\begin{highlights}
+                \item %Promoted to Lead Student Ambassador in the Fall of %2004, supervised 10 - 15 Student Ambassadors.
+            %\end{highlights}
+            %&
+            %WA, USA
+
+            %June 2003 to Aug. 2003
+
+            %2 months
+       % \end{tabularx}
+
+
+    
+   % \section{Publications}
+
+        %\begin{tabularx}{\textwidth-0.4 cm-0.13cm}{K{0.2 cm} R{4.1 cm}}
+           % \textbf{Magneto-Thermal Thin Shell Approximation for 3D Finite Element Analysis of No-Insulation Coils}
+
+            %\vspace{0.10 cm}
+
+            %\mbox{A. Smith}, \mbox{\textbf{\textit{J. Doe}}}, \mbox{J. Derry}, \mbox{H. Tom}, \mbox{A. Andsurname}
+
+            %\vspace{0.10 cm}
+
+            %\href{https://doi.org/10.1109/TASC.2023.3340648}{10.1109/TASC.2023.3340648} ()    &
+           % Jan. 2004
+        %\end{tabularx}
+
+
+    
+    \section{Projects}
+
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+           \textbf{Personal Chatbot} $|$  \href{https://github.com/09hritik/jarvis}{\raisebox{-0.2\height}\faGithub\ }
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item 
+                    Developed an AI chatbot named Jarvis using TensorFlow and NLTK libraries.
+                \item 
+                    Integrated voice recognition and synthesis capabilities for seamless interaction.
+
+                \item 
+                    Incorporated YouTube search and playback, alongside Google search, enriching the chatbot's capabilities for enhanced user assistance.
+
+
+                \item Used Python,  TensorFlow, NLTK 
+            \end{highlights}
+            &
+            
+
+            Oct.  '23
+        \end{tabularx}
+
+
+        \vspace{0.2 cm}
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{Weather Application}
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item 
+                    Integrated reliable weather data APIs , including OpenWeatherMap API, for accurate forecasts.
+
+                \item Used  MySQL and Java 
+            \end{highlights}
+            &
+            
+
+            Dec.  '23
+        \end{tabularx}
+
+
+        \vspace{0.2 cm}
+        
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{Real Time Attendence System}
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item  
+                    Implemented face detection and recognition algorithms to identify individuals in live video streams.
+                \item 
+                Utilized the face recognition library for encoding and comparing facial features to verify the identity of users.
+                \item  
+                    Used Python and OpenCV 
+               
+            \end{highlights}
+            &
+            Nov.  '23
+        \end{tabularx}
+
+  \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf 
+            {Sentiment Analysis Model}$|$ \href{https://github.com/09hritik/sentiment-analysis}{\raisebox{-0.2\height}\faGithub\ }
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item  
+                   
+            \begin{enumerate}
+                Built sentiment analysis model using Hugging Face's datasets and transformers.
+
+            \end{enumerate}
+
+            \item 
+                Leveraged DAIR AI Emotion dataset and DistilBERT pre-trained model.
+
+            \item  
+                Implemented DistilBERT architecture, tokenizer, and training pipeline for NLP tasks.
+            \item 
+                Used  Python And Transformers
+               
+            \end{highlights}
+            &
+            Nov.  '23
+    \end{tabularx}
+
+
+    
+    %\section{Additional Experience And Awards}
+
+       % \begingroup\leftskip=0.2 cm
+        %\advance\csname @rightskip\endcsname 0.2 cm
+        %\advance\rightskip 0.2 cm
+
+        %\textbf{Instructor (2003 - 2005):} Taught two full-credit Computer Science courses. \par\endgroup
+
+        %\vspace{0.2 cm}
+        %\begingroup\leftskip=0.2 cm
+        %\advance\csname @rightskip\endcsname 0.2 cm
+        %\advance\rightskip 0.2 cm
+
+        %\textbf{Third Prize, Senior Design Projects:} Awarded 3rd prize for a synchronized calendar project out of 100 projects. \par\endgroup
+
+
+    
+    \section{Technologies}
+
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Languages:}  Python , Java ,  JavaScript   \par\endgroup
+
+        \vspace{0.2 cm}
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Software:} Visual Studio Code, Git, TensorFlow , NLTK, PyTorch \par\endgroup
+
+
+    
+
+\end{document}
